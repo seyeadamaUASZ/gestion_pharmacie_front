@@ -1,0 +1,125 @@
+<div class="main-content">
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Enregistrer un client</h4>
+                        <p class="card-category">enregistrer</p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                      <input formControlName="nom" matInput placeholder="Nom">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                      <input formControlName="prenom" matInput placeholder="Prénom" type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input formControlName="adresse" matInput placeholder="Adresse" type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input formControlName="telephone" matInput placeholder="Téléphone" type="text">
+                                      </mat-form-field>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input formControlName="credit" matInput placeholder="Crédit" type="number">
+                                      </mat-form-field>
+                                </div>
+                            </div>
+                            
+
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Enregistrer</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Liste des clients</h4>
+                        <p class="card-category"> les clients ayant des credits</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table" datatable [dtOptions]="dtOptions1" [dtTrigger]="dtTrigger1">
+                                <thead style="color:black ;">
+                                    <tr>
+
+                                    <th>
+                                        Identifiant
+                                    </th>
+                                    <th>
+                                        Nom 
+                                    </th>
+                                    <th>
+                                        Prénom
+                                    </th>
+                                    <th>
+                                       Téléphone
+                                    </th>
+                                    <th>
+                                        Adresse
+                                     </th>
+
+                                     <th>
+                                        Crédit
+                                     </th>
+
+                                    <th>
+                                        Option
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let c of data">
+                                        <!-- <td>{{m.id}}</td> -->
+                                        <td>{{c.id}}</td>
+                                        <td>{{c.nom}}</td>
+                                        <td>{{c.prenom}}</td>
+                                        <td>{{c.telephone}}</td>
+                                        <td>{{c.adresse}}</td>
+                                        <td>{{c.credit}}</td>
+                                        <td>
+                                          <button class="primary" (click)="loadClientToEdit(c.id)">
+                                            <i class="material-icons">edit</i>
+                                          </button>  |
+                                          <button class="danger" (click)="deleteClient(c.id)">
+                                            <i class="material-icons">delete</i>
+                                          </button>
+                                            
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,160 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Enregistrer un nouveau médicament</h4>
+                        <p class="card-category">enregistrer</p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="medicamentForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                      <input formControlName="nomMedicament" matInput placeholder="Nom">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                      <input formControlName="stock" matInput placeholder="Stock" type="number">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input formControlName="prixu" matInput placeholder="Prix unitaire" type="number">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Categorie</mat-label>
+                                        <mat-select formControlName="categorie">
+                                            <mat-option selected="true" *ngIf="medicament != null" [value]="medicament?.categorie">
+                                                {{medicament?.categorie?.nom}}
+                                            </mat-option>
+
+                                            <mat-option *ngFor="let c of categories" [value]="c">
+                                            <span *ngIf="medicament != null && c.nom === medicament?.categorie?.nom"></span>
+                                            <span *ngIf="medicament != null && c.nom != medicament?.categorie?.nom">{{c.nom}}</span>
+                                                   
+                                          </mat-option>
+
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                  <mat-form-field class="example-full-width">
+                                    <input formControlName="urlImage" matInput placeholder="url image " type="text">
+                                  </mat-form-field>
+                                </div>
+                            </div>
+
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Enregistrer</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Liste des médicaments</h4>
+                        <p class="card-category"> les médicaments disponibles</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                                <thead style="color:black ;">
+                                    <!-- <th>
+                                        ID
+                                    </th> -->
+                                    <tr>
+                                    <th>
+                                        Code Médicament
+                                    </th>
+                                    <th>
+                                        Nom
+                                    </th>
+                                    <th>
+                                        Stock
+                                    </th>
+                                    <th>
+                                       Prix unitaire
+                                    </th>
+                                    <th>
+                                        Catégorie
+                                     </th>
+
+                                     <th>
+                                         image
+                                     </th>
+                                     <th>
+                                        statut
+                                     </th>
+                                    <th>
+                                        Option
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let m of data">
+                                        <!-- <td>{{m.id}}</td> -->
+                                        <td>{{m.codeMedicament}}</td>
+                                        <td>{{m.nomMedicament}}</td>
+                                        <td>{{m.stock}}</td>
+                                        <td>{{m.prixu}}</td>
+                                        <td>{{m.categorie.nom}}</td>
+                                        
+                                        <td>
+                                            <img src="{{m.urlImage}}" width="100" height="100" alt="">
+                                        </td>
+                                        <td *ngIf="m.stock < 10"><p>
+
+                                            <button mat-raised-button class="btn btn-danger"
+                                                matBadge="" matBadgePosition="before" matBadgeColor="accent">
+                                                rupture
+                                            </button>
+                                          </p>
+                                    </td>
+                                    <td *ngIf="m.stock >= 10"><p>
+                                       
+                                        <button mat-raised-button class="btn btn-success"
+                                            matBadge="" matBadgePosition="before" matBadgeColor="accent">
+                                          En Stock
+                                        </button>
+                                      </p>
+                                </td>
+                                        <td>
+                                          <button class="primary" (click)="loadMedicamentToEdit(m.id)">
+                                            <i class="material-icons">edit</i>
+                                          </button>  |
+                                          <button class="danger" (click)="deleteMedicament(m.id)">
+                                            <i class="material-icons">delete</i>
+                                          </button>
+                                            
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+

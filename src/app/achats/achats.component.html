@@ -1,0 +1,178 @@
+<div class="main-content">
+<div class="container-fluid">
+    <div class="row">
+       <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title">Enregistrer une nouvelle transaction</h4>
+                <p class="card-category">enregistrer</p>
+            </div>
+            <div class="card-body">
+
+                <form [formGroup]="achatForm" (ngSubmit)="onSubmit()" class="example-form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Médicament</mat-label>
+                                <input type="text"
+                                       placeholder="Sélectionnez"
+                                       aria-label="Number"
+                                       matInput
+                                       [formControl]="myControl"
+                                       [matAutocomplete]="autoOrigin"
+                                       (ngModelChange)="nameChanged($event)"
+                                       >
+                                <mat-autocomplete #autoOrigin="matAutocomplete">
+                                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                    {{option}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Client</mat-label>
+                                <input type="text"
+                                       placeholder="Sélectionnez"
+                                       aria-label="Number"
+                                       matInput
+                                       [formControl]="myControl"
+                                       [matAutocomplete]="autoDest"
+                                       (ngModelChange)="nameChanged1($event)"
+                                       >
+                                <mat-autocomplete #autoDest="matAutocomplete">
+                                  <mat-option *ngFor="let option of filteredOptions1 | async" [value]="option">
+                                    {{option}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                        </div>
+
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input formControlName="quantite" matInput placeholder="quantite" type="number" 
+                              (ngModelChange)="nameChanged2($event)">
+                            </mat-form-field>         
+                    </div>  
+
+
+                    <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input formControlName="prixu" matInput placeholder="prix unitaire" type="number">
+                            </mat-form-field>         
+                    </div>            
+                    </div>
+                     
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-radio-group matTooltip="Type Achat" formControlName="typeAchat">
+                                <mat-radio-button value="credit" [checked]="isCredit">Crédit</mat-radio-button>&nbsp;&nbsp;
+                                <mat-radio-button value="vente" [checked]="isVente">Vente</mat-radio-button>&nbsp;&nbsp;
+                              </mat-radio-group>
+                        </div> 
+
+                        <div class="col-md-6">
+                            <span style="font-size: 60px; color: green; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+                                {{prixtotal}} FCFA
+                            </span>
+                        
+                        </div>
+                    </div>
+                    <br>
+                    <button mat-raised-button type="submit" class="btn btn-danger pull-right">Enregistrer</button>
+                    <div class="clearfix"></div>                
+                  </form> 
+                
+            </div>
+        </div>
+       </div>
+
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title ">Liste des clients</h4>
+                    <p class="card-category"> les clients ayant des credits</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table" datatable [dtOptions]="dtOptions1" [dtTrigger]="dtTrigger1">
+                            <thead style="color:black ;">
+                                <tr>
+
+                                <th>
+                                    Identifiant
+                                </th>
+
+                                <th>
+                                    Date Achat
+                                </th>
+
+                                <th>
+                                    Medicament 
+                                </th>
+                                <th>
+                                   Quantité vendue
+                                </th>
+                                <th>
+                                   Prix total
+                                </th>
+                                <th>
+                                    Client
+                                 </th>
+
+                                 <th>
+                                    Type Achat
+                                 </th>
+
+                                <th>
+                                    Option
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let c of data">
+                                    <!-- <td>{{m.id}}</td> -->
+                                    <td>{{c.id}}</td>
+                                    <td>{{c.dateOperation}}</td>
+                                    <td>{{c.medicament.nomMedicament}}</td>
+                                    <td>{{c.quantite}}</td>
+                                    <td>{{c.totalPrice}}</td>
+                                    <td *ngIf="c.client!=null">{{c.client.nom}} {{c.client.prenom}}</td>
+                                    <td *ngIf="c.client ==null">Néant</td>
+                                    <td>{{c.typeAchat}}</td>
+                                    <td>
+                                      <button class="primary" (click)="loadClientToEdit(c.id)">
+                                        <i class="material-icons">edit</i>
+                                      </button>  |
+                                      <button class="danger" (click)="deleteClient(c.id)">
+                                        <i class="material-icons">delete</i>
+                                      </button>
+                                        
+                                    </td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+
+
+</div>
