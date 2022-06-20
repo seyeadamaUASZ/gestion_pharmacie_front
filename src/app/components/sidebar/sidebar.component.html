@@ -1,10 +1,16 @@
 <div class="logo">
-    <a href="#" class="simple-text">
+    <a class="simple-text">
         <div class="logo-img">
             <img src="/assets/cross.jpg"/>
         </div> &nbsp; &nbsp; &nbsp;
         <span style="font-size: 14px;">Gestion pharmacie</span> 
+        <br>
+        <i class="material-icons">person</i>
+        <span style="color: black;font-size: 11px;">{{user.lastName}} {{user.firstName}}</span> 
+        <br>
+        <span style="color: black;font-size: 11px;">{{user.profil.nameProfil}}</span> 
     </a>
+   
 </div>
 <div class="sidebar-wrapper">
   <div *ngIf="isMobileMenu()">

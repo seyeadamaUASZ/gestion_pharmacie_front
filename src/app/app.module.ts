@@ -8,6 +8,10 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { DataTablesModule } from 'angular-datatables';
+import { LoginComponent } from './login/login.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -19,11 +23,15 @@ import { DataTablesModule } from 'angular-datatables';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    DataTablesModule
+    DataTablesModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSnackBarModule,
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent, 
+    AdminLayoutComponent,
+    LoginComponent, 
 
   ],
   providers: [],

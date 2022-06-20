@@ -80,6 +80,10 @@ export class ManageService {
     return this.http.post(this.api+'achat',data)
   }
 
+  public login(data:any){
+    return this.http.post(this.api+'auth/login',data)
+  }
+
   
 
 }
